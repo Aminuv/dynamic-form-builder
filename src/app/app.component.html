@@ -1,22 +1,19 @@
 <router-outlet></router-outlet>
 
 <!-- Original Tailwind Test -->
-<div class="min-h-screen bg-gradient-to-br from-blue-50 to-green-100 flex items-center justify-center p-6">
-  <div class="max-w-md w-full bg-white shadow-lg rounded-2xl p-8">
-    <h1 class="text-3xl font-extrabold text-blue-600 mb-4 text-center">🚀 TailwindCSS Works!</h1>
+<div class="flex flex-col h-screen bg-gray-100 px-4">
 
-    <p class="text-gray-700 mb-6 text-center">
-      This card is styled with <span class="font-semibold text-green-600">Tailwind CSS</span>. If you can see the gradient background, rounded box, and button effects — it’s working! 🎉
+  <div class="flex flex-col gap-1 items-center justify-center p-10">
+    <h1 class="text-2xl font-medium tracking-wide">
+      Dynamic Form Builder
+    </h1>
+    <p class="text-gray-500">
+      A dynamic form builder application built with Angular.
     </p>
-
-    <div class="flex justify-center">
-      <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
-        Test Button
-      </button>
-    </div>
   </div>
+ <div class="flex gap-4">
+  <app-form-elements-menu class="w-64"></app-form-elements-menu>
+  <app-main-canvas class="flex-1"></app-main-canvas>
+  <app-field-settings class="w-64"></app-field-settings>
+ </div>
 </div>
-
-
-<!-- New Tailwind Test Component -->
-<!-- <app-tailwind-test></app-tailwind-test> -->
