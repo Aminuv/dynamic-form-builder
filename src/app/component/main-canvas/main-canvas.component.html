@@ -8,6 +8,13 @@
         <mat-button-toggle value="editor">Form Editor</mat-button-toggle>
         <mat-button-toggle value="preview">Form Preview</mat-button-toggle>
     </mat-button-toggle-group>
+    @if (activeTab() === 'editor') {
+        <div class="flex-1"></div>
+            <button mat-flat-button (click)="formService.addRow()">add Row
+                <mat-icon>add_circle</mat-icon>
+            </button>
+        
+    }
 </div>
 @if (activeTab() === 'editor') {
     <app-form-editor></app-form-editor>

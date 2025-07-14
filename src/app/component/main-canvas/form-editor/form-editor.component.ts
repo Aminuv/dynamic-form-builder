@@ -4,13 +4,17 @@ import { FormService } from '../../../service/form.service';
 import { FieldTypesDefinition } from '../../../models/field';
 import { FormField } from '../../../models/field';
 import { FormFieldComponent } from "../form-field/form-field.component";
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-form-editor',
   standalone: true,
   imports: [
     DragDropModule,
-    FormFieldComponent
+    FormFieldComponent,
+    MatButtonModule,
+    MatIconModule
 ],
   templateUrl:'./form-editor.component.html',
   styleUrl: './form-editor.component.scss'
