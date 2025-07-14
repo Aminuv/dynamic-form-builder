@@ -14,7 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
     DragDropModule,
     FormFieldComponent,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    DragDropModule
 ],
   templateUrl:'./form-editor.component.html',
   styleUrl: './form-editor.component.scss'
@@ -37,6 +38,9 @@ export class FormEditorComponent {
       return;
     }
     
+    const dragData = event.item.data as FormField;
+    const previousRowId = event.previousContainer.data as string;
+    
+    this.formService.moveField(dragData.id, previousRowId, rowId, event.currentIndex);
   }
-
 }
