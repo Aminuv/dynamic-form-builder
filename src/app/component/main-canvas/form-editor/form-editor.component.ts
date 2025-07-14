@@ -1,11 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+import { FormService } from '../../../service/form.service';
+import { FieldTypesDefinition } from '../../../models/field';
+import { FormField } from '../../../models/field';
+import { FormFieldComponent } from "../form-field/form-field.component";
 
 @Component({
   selector: 'app-form-editor',
-  imports: [],
-  templateUrl: './form-editor.component.html',
+  standalone: true,
+  imports: [
+    DragDropModule,
+    FormFieldComponent
+],
+  templateUrl:'./form-editor.component.html',
   styleUrl: './form-editor.component.scss'
 })
 export class FormEditorComponent {
+
+  formService = inject(FormService);
+  
+  onDropInRow(event: CdkDragDrop<string>, rowId: string) {
+    if (event.previousContainer.data === 'field-selector') {
+      // add field to the row
+      const fieldType = event.item.data as FieldTypesDefinition;
+      const newField: FormField = {
+        id: crypto.randomUUID(),
+        type: fieldType.type,
+        ...fieldType.defaultConfig
+      }
+      
+      this.formService.addField(newField, rowId, event.currentIndex);
+      return;
+    }
+    
+  }
 
 }

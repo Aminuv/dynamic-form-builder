@@ -3,11 +3,17 @@ import { RouterOutlet } from '@angular/router';
 import { FormElementsMenuComponent } from './component/form-elements-menu/form-elements-menu.component';
 import { MainCanvasComponent } from './component/main-canvas/main-canvas.component';
 import { FieldSettingsComponent } from './component/field-settings/field-settings.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormElementsMenuComponent, MainCanvasComponent, FieldSettingsComponent],
+  imports: [RouterOutlet,
+    FormElementsMenuComponent,
+    MainCanvasComponent,
+    FieldSettingsComponent,
+    DragDropModule
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

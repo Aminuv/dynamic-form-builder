@@ -1,1 +1,16 @@
-<p>form-editor works!</p>
+<div class="p-4 ">
+    @for (row of formService.rows(); track row.id) {
+        <div
+            cdkDropList
+            (cdkDropListDropped)="onDropInRow($event, row.id)"
+class="p-5 bg-white rounded-lg border-2 border-dashed border-gray-200"
+>
+<div class=>Row</div>
+<div class="flex flex-wrap gap-4">
+@for (field of row.fields; track field.id) {
+    <app-form-field class="flex-1" [field]="field"></app-form-field>
+}
+</div>
+</div>
+    }
+</div>

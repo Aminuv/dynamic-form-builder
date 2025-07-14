@@ -1,12 +1,14 @@
 import { Component, input } from '@angular/core';
-import { FieldTypesDefinition } from '../../../models/fild';
+import { FieldTypesDefinition } from '../../../models/field';
 import { MatIconModule } from '@angular/material/icon';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-field-button',
   standalone: true,
   imports: [
-    MatIconModule
+    MatIconModule,
+    DragDropModule
   ],
   templateUrl: './field-button.component.html',
   styleUrl: './field-button.component.scss'
