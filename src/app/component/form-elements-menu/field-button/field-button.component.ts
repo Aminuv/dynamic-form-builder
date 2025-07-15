@@ -1,7 +1,7 @@
-import { Component, input } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { FieldTypesDefinition } from '../../../models/field';
 import { MatIconModule } from '@angular/material/icon';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DragDropModule, CdkDrag } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-field-button',
@@ -16,5 +16,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 export class FieldButtonComponent {
 
   field = input.required<FieldTypesDefinition>();
+
+  whileDragging = signal(false);
 
 }

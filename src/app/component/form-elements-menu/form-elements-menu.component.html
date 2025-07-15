@@ -8,6 +8,7 @@ shadow-sm"
         cdkDropList
         cdkDropListSortingDisabled="true"
         [cdkDropListData]="'field-selector'"
+        [cdkDropListEnterPredicate]="noDropAllowed"
     >
     @for (fieldType of fieldTypes; track fieldType.type) {
         <app-field-button [field]="fieldType"></app-field-button>
