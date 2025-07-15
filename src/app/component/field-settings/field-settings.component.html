@@ -40,6 +40,13 @@
                             </mat-select>
                         </mat-form-field>
                     }
+                    @case ('dynamic-Option') {
+                        <app-dynamic-option
+                        [title]="setting.label"
+                        [options]="fieldValues()[setting.key]"
+                        (optionChange)="updateField(selectedField.id, setting.key, $event)"
+                        ></app-dynamic-option>
+                    }
                 }
             }
         </div>

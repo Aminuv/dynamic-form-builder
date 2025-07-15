@@ -11,7 +11,7 @@ export interface FieldTypesDefinition {
 }
 
 export interface FieldSettingsDefinition {
-    type: 'text' | 'checkbox' | 'select';
+    type: 'text' | 'checkbox' | 'select' | 'dynamic-Option';
     key: string;
     label: string;
     options?: OptionItem[];
@@ -29,4 +29,5 @@ export interface FormField {
     required: boolean;
     inputType?: string;
     placeholder?: string;
+    options?: OptionItem[];
 }

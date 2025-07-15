@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatCheckbox } from "@angular/material/checkbox";
 import { MatSelectModule } from '@angular/material/select';
+import { DynamicOptionComponent } from "./dynamic-option/dynamic-option.component";
 
 @Component({
   selector: 'app-field-settings',
@@ -15,7 +16,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatInput,
     MatCheckbox,
-    MatSelectModule
+    MatSelectModule,
+    DynamicOptionComponent
 ],
   templateUrl: './field-settings.component.html',
   styleUrl: './field-settings.component.scss'
