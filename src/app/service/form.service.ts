@@ -122,4 +122,30 @@ export class FormService {
     }));
     this._rows.set(newRows)
   }
+
+  moveRowUp(rowId: string) {
+    const rows = this._rows();
+    const index = rows.findIndex(r => r.id === rowId);
+    if (index > 0) {
+      const newRow = [...rows];
+      const temp = newRow[index - 1];
+      newRow[index - 1] = newRow[index];
+      newRow[index] = temp;
+      this._rows.set(newRow);
+    }
+  }
+
+  moveRowDown(rowId: string) {
+    const rows = this._rows();
+    const index = rows.findIndex(r => r.id === rowId);
+    if (index < rows.length - 1) {
+      const newRow = [...rows];
+      const temp = newRow[index + 1];
+      newRow[index + 1] = newRow[index];
+      newRow[index] = temp;
+      this._rows.set(newRow);
+    }
+  }
+
+
 }
