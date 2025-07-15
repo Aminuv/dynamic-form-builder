@@ -31,7 +31,15 @@ const TEXT_FIELD_DEFINITION: FieldTypesDefinition = {
     ]
     }
   ],
-  component: TextFieldComponent
+  component: TextFieldComponent,
+  generateCode: (field) => {
+    return `
+    <mat-form-field appearance="outline" class="w-full">
+    <mat-label>${field.label}</mat-label>
+    <input matInput type="${field.inputType || 'text'}" required="${field.required}" placeholder="${field.placeholder}">
+  </mat-form-field>
+    `
+  }
 }
 
 const CHECKBOX_FIELD_DEFINITION: FieldTypesDefinition = {
@@ -48,7 +56,15 @@ const CHECKBOX_FIELD_DEFINITION: FieldTypesDefinition = {
     },
     {type: 'checkbox', key: 'required', label: 'Required'}
   ],
-  component: CheckboxFieldComponent
+  component: CheckboxFieldComponent,
+  generateCode: (field) => {
+    return `
+    <mat-form-field appearance="outline" class="w-full">
+    <mat-label>${field.label}</mat-label>
+    <input matInput type="checkbox" required="${field.required}">
+  </mat-form-field>
+    `
+  }
 }
 
 const SELECT_FIELD_DEFINITION: FieldTypesDefinition = {
@@ -70,6 +86,26 @@ const SELECT_FIELD_DEFINITION: FieldTypesDefinition = {
     {type: 'checkbox', key: 'required', label: 'Required'},
     {type: 'dynamic-Option', key: 'options', label: 'DropdownOptions'}
   ],
+  generateCode: (field) => {
+    let code = 
+   `       <mat-form-field appearance="outline" class="w-full">\n`+
+   `         <mat-label>${field.label}</mat-label>\n`+
+   `         <mat-select required="${field.required}">\n`;
+
+    if (field.options) {
+      field.options.forEach(option => {
+        code += `           <mat-option [value]="${option.value}">${option.label}</mat-option>\n`;
+      });
+    } else {
+      code += 
+      `           <mat-option value="option1">Option 1</mat-option>\n`+
+      `           <mat-option value="option2">Option 2</mat-option>\n`+
+      `           <mat-option value="option3">Option 3</mat-option>\n`;
+    }
+    code += `         </mat-select>\n    `+
+            `         </mat-form-field>\n`;
+    return code;
+  }
 }
 
 @Injectable({

@@ -1,5 +1,4 @@
 import { Type } from "@angular/core";
-import test from "node:test";
 
 export interface FieldTypesDefinition {
     type: string;
@@ -8,6 +7,7 @@ export interface FieldTypesDefinition {
     defaultConfig?: any;
     settingsConfig: FieldSettingsDefinition[];
     component: Type<unknown>;
+    generateCode: (field: FormField) => string;
 }
 
 export interface FieldSettingsDefinition {
