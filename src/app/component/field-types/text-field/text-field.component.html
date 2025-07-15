@@ -1,5 +1,7 @@
 <mat-form-field class="w-full">
     <mat-label>{{ field().label }}</mat-label>
     <input matInput [type]="field().inputType || 'text'"
-    [required]="field().required">
+    [required]="field().required"
+    [placeholder]="field().placeholder || ''"
+    >
 </mat-form-field>
