@@ -1,7 +1,8 @@
 import { FieldTypesService } from './field-types.service';
-import { computed, Injectable, signal } from '@angular/core';
+import { ApplicationRef, computed, inject, Injectable, signal } from '@angular/core';
 import { FormRow } from '../models/form';
 import { FormField } from '../models/field';
+import { startViewTransition } from '../utils/view-transition';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ export class FormService {
   private _rows = signal<FormRow[]>([]);
   private _selectedFieldId = signal<string | null>(null);
   public readonly rows = this._rows.asReadonly();
+
+  private appRef = inject(ApplicationRef);
 
   public readonly selectedField = computed(() =>
     this._rows()
@@ -44,7 +47,10 @@ export class FormService {
       }
       return row;
     });
-    this._rows.set(newRow);
+    startViewTransition(() => {
+      this._rows.set(newRow);
+    });
+    
   }
 
   deletField(fieldId: string) {
@@ -53,7 +59,10 @@ export class FormService {
       ...row,
       fields: row.fields.filter(f => f.id !== fieldId)
     }));
-    this._rows.set(newRows);
+    startViewTransition(() => {
+      this._rows.set(newRows);
+      this.appRef.tick();
+    });
   }
 
 
@@ -63,7 +72,9 @@ export class FormService {
       fields: []
     };
     const rows = this._rows();
-    this._rows.set([...rows, newRows]);
+    startViewTransition(() => {
+      this._rows.set([...rows, newRows]);
+    });
   }
 
   deleteRow(rowId: string) {
@@ -72,7 +83,11 @@ export class FormService {
     }
     const rows = this._rows();
     const newRows = rows.filter(row => row.id !== rowId);
-    this._rows.set(newRows);
+    startViewTransition(() => {
+      this._rows.set(newRows);
+      this.appRef.tick();
+    });
+    
   }
 
 
@@ -109,7 +124,11 @@ export class FormService {
       targetfields.splice(targetIndex, 0, fieldToMove);
       newRows[targetRowIndex].fields = targetfields;
     }
-    this._rows.set(newRows);
+    startViewTransition(() => {
+      this._rows.set(newRows);
+      this.appRef.tick();
+    });
+    
   }
 
   setSelectedFieldId(fieldId: string) {
@@ -133,7 +152,9 @@ export class FormService {
       const temp = newRow[index - 1];
       newRow[index - 1] = newRow[index];
       newRow[index] = temp;
-      this._rows.set(newRow);
+      startViewTransition(() => {
+        this._rows.set(newRow);
+      });
     }
   }
 
@@ -145,13 +166,15 @@ export class FormService {
       const temp = newRow[index + 1];
       newRow[index + 1] = newRow[index];
       newRow[index] = temp;
-      this._rows.set(newRow);
+      startViewTransition(() => {
+        this._rows.set(newRow);
+      });
     }
   }
 
 
 
-  // export form
+  // export form to file
   exportForm() {
     const formCode = this.generateFormCode();
     console.log(formCode);
