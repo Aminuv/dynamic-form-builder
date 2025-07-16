@@ -96,7 +96,9 @@ export class FormService {
     targetRowId: string,
     targetIndex: number = -1,
   ) {
-    const rows = this._rows();
+
+    startViewTransition(() => {
+      const rows = this._rows();
     let fieldToMove: FormField | undefined;
     let sourceRowIndex: number = -1;
     let sourceFieldIndex: number = -1;
@@ -124,9 +126,8 @@ export class FormService {
       targetfields.splice(targetIndex, 0, fieldToMove);
       newRows[targetRowIndex].fields = targetfields;
     }
-    startViewTransition(() => {
-      this._rows.set(newRows);
-      this.appRef.tick();
+    this._rows.set(newRows);
+    this.appRef.tick();
     });
     
   }

@@ -5,6 +5,7 @@
             [cdkDropListData]="row.id"
             (cdkDropListDropped)="onDropInRow($event, row.id)"
             [cdkDropListOrientation]="'mixed'"
+            [style.view-transition-name]="'row'+row.id"
             class="relative p-5 pt-2 ps-10 mb-4 bg-white rounded-lg border-2 border-dashed border-gray-200"
         >
 <div class="flex justify-between items-center">
@@ -18,6 +19,10 @@
     <app-form-field class="flex-1" [field]="field"
     cdkDrag
     [cdkDragData]="field"
+    class="flex-1"
+    [field]="field"
+    [style.view-transition-name]="'field'+field.id"
+    [style.view-transition-class]="'field-transition'"
     ></app-form-field>
 }@empty{
     <div class="w-full p-4 border border-dashed border-primary-container rounded-lg flex items-center justify-center"
