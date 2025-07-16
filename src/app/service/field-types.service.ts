@@ -3,6 +3,7 @@ import { FieldTypesDefinition } from '../models/field';
 import { TextFieldComponent } from '../component/field-types/text-field/text-field.component';
 import { CheckboxFieldComponent } from '../component/field-types/checkbox-field/checkbox-field.component';
 import { SelectFieldComponent } from '../component/field-types/select-field/select-field.component';
+import { DateFieldComponent } from '../component/field-types/date-field/date-field.component';
 
 const TEXT_FIELD_DEFINITION: FieldTypesDefinition = {
   type: 'text',
@@ -108,6 +109,33 @@ const SELECT_FIELD_DEFINITION: FieldTypesDefinition = {
   }
 }
 
+const DATE_FIELD_DEFINITION: FieldTypesDefinition = {
+  type: 'date',
+  label: 'Date Picker',
+  icon: 'calendar_today',
+  component: DateFieldComponent,
+  defaultConfig: {
+    label: 'Date',
+    required: false
+  },
+  settingsConfig: [
+    {
+      type: 'text', key: 'label', label: 'Label'
+    },
+    {type: 'checkbox', key: 'required', label: 'Required'}
+  ],
+  generateCode: (field) => {
+    return `
+    <mat-form-field appearance="outline" class="w-full">
+    <mat-label>${field.label}</mat-label>
+    <input matInput [matDatepicker]="picker"${field.id}" [required]="${field.required}">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"${field.id}></mat-datepicker-toggle>
+    <mat-datepicker #picker${field.id}></mat-datepicker>
+  </mat-form-field>
+    `
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -116,7 +144,8 @@ export class FieldTypesService {
   fieldTypes = new Map<string, FieldTypesDefinition>([
     ['text', TEXT_FIELD_DEFINITION],
     ['checkbox', CHECKBOX_FIELD_DEFINITION],
-    ['select', SELECT_FIELD_DEFINITION]
+    ['select', SELECT_FIELD_DEFINITION],
+    ['date', DATE_FIELD_DEFINITION]
   ])
 
   getFieldType(type: string): FieldTypesDefinition | undefined {
