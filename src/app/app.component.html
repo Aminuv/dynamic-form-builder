@@ -18,7 +18,10 @@
   <app-form-elements-menu class="w-64"></app-form-elements-menu>
   <app-main-canvas class="flex-1"></app-main-canvas>
   <app-field-settings class="w-64"></app-field-settings>
-  <button mat-flat-button class="!absolute top-[50px] right-0" (click)="formService.exportForm()">
+  <button 
+  mat-flat-button 
+  class="!absolute top-[50px] right-0 compact-button" 
+  (click)="formService.exportForm()">
     <mat-icon>save</mat-icon>
     Export Form</button>
  </div>

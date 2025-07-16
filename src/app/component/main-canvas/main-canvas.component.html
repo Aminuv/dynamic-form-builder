@@ -10,7 +10,9 @@
     </mat-button-toggle-group>
     @if (activeTab() === 'editor') {
         <div class="flex-1"></div>
-            <button mat-flat-button (click)="formService.addRow()">add Row
+            <button class="compact-button" 
+            mat-flat-button 
+            (click)="formService.addRow()">add Row
                 <mat-icon>add_circle</mat-icon>
             </button>
         

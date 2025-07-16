@@ -1,7 +1,7 @@
 
 // Custom Theming for Angular Material
 // For more information: https://material.angular.dev/guide/theming
-/*@use '@angular/material' as mat;
+@use '@angular/material' as mat;
 
 html {
   @include mat.theme((
@@ -13,7 +13,7 @@ html {
     typography: Roboto,
     density: 0,
   ));
-}*/
+}
 
 // Tailwind CSS
 @import "./tailwind.css";
@@ -27,4 +27,20 @@ html {
 .cdk-drop-list-dragging:not(.elements-menu) {
     border: 2px solid lightgray !important;
     background-color: lightgray !important;
+}
+
+.compact-button {
+   @include mat.button-overrides((
+    filled-container-height: 36px,
+    filled-container-shape: 5px,
+    
+   ));
+}
+
+mat-form-field {
+    @include mat.theme(
+      (
+      density: -3 
+    )
+    );
 }
